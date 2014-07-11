@@ -1,5 +1,6 @@
 #ifndef EXAMPLE_H
 #define EXAMPLE_H
+#include <string>
 #include <iostream>
 #include <set>
 #include <array>
@@ -158,32 +159,26 @@ namespace sudoku_solver
             result = solve( result );
             return rest.solve( result );
         }
+        void prase( const std::string & str )
+        {
+            for ( size_t j = 0; j < 9; ++j )
+            {
+                for ( size_t i = 0; i < 9; ++i )
+                {
+                    const char & c = str[j*9+i];
+                    if ( c != '0' ) { fill( index( i, j ), c - '0' ); }
+                }
+            }
+
+        }
     };
 
     void example( )
     {
         sudoku su;
-        su.fill( sudoku::index( 0, 0 ), 8 );
-        su.fill( sudoku::index( 2, 1 ), 3 );
-        su.fill( sudoku::index( 3, 1 ), 6 );
-        su.fill( sudoku::index( 1, 2 ), 7 );
-        su.fill( sudoku::index( 4, 2 ), 9 );
-        su.fill( sudoku::index( 6, 2 ), 2 );
-        su.fill( sudoku::index( 1, 3 ), 5 );
-        su.fill( sudoku::index( 5, 3 ), 7 );
-        su.fill( sudoku::index( 4, 4 ), 4 );
-        su.fill( sudoku::index( 5, 4 ), 5 );
-        su.fill( sudoku::index( 6, 4 ), 7 );
-        su.fill( sudoku::index( 3, 5 ), 1 );
-        su.fill( sudoku::index( 7, 5 ), 3 );
-        su.fill( sudoku::index( 2, 6 ), 1 );
-        su.fill( sudoku::index( 7, 6 ), 6 );
-        su.fill( sudoku::index( 8, 6 ), 8 );
-        su.fill( sudoku::index( 2, 7 ), 8 );
-        su.fill( sudoku::index( 3, 7 ), 5 );
-        su.fill( sudoku::index( 7, 7 ), 1 );
-        su.fill( sudoku::index( 1, 8 ), 9 );
-        su.fill( sudoku::index( 6, 8 ), 4 );
+        std::string str;
+        std::cin >> str;
+        su.prase( str );
         su.solve( std::ostream_iterator< sudoku::completed_sudoku >( std::cout, "\n" ) );
     }
 }
