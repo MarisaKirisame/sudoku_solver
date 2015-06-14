@@ -5,6 +5,5 @@ CONFIG -= qt
 QMAKE_CXXFLAGS += -std=c++1y
 SOURCES += main.cpp
 
-HEADERS += \
-    example.h
+HEADERS +=
 
